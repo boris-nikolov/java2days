@@ -18,10 +18,50 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    def signing_secret = System.getenv('JAVA2DAYS_SIGN_SECRET')
+    signingConfigs {
+        prodConfig {
+            storeFile file("java2days_prod_keystore.jks")
+            storePassword signing_secret
+            keyAlias "java2daysProdAlias"
+            keyPassword signing_secret
+        }
+
+        demoConfig {
+            storeFile file("java2days_keystore.jks")
+            storePassword signing_secret
+            keyAlias "java2daysAlias"
+            keyPassword signing_secret
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            debuggable true
+        }
+    }
+
+    flavorDimensions "version"
+    productFlavors {
+        production {
+            dimension "version"
+            buildConfigField "String", "SERVER_URL", '"https://api.github.com/"'
+            manifestPlaceholders = [app_name: "Java2Days"]
+            signingConfig signingConfigs.prodConfig
+        }
+
+        demo {
+            dimension "version"
+            buildConfigField "String", "SERVER_URL", '"https://demo-api.github.com/"'
+            applicationIdSuffix ".demo"
+            versionNameSuffix "-demo"
+            manifestPlaceholders = [app_name: "Java2Days-Demo"]
+            signingConfig signingConfigs.demoConfig
         }
     }
 
