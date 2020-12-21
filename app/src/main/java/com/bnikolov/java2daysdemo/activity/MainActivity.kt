@@ -10,6 +10,7 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+// comment
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
