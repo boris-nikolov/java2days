@@ -3,6 +3,8 @@
     package="com.bnikolov.java2daysdemo">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".Java2DaysDemo"
         android:allowBackup="true"
