@@ -10,7 +10,11 @@ class RepositoryViewModel @Inject constructor(
 
     val repositoriesLiveData = repository.repositoriesLiveData
 
+    val pullRequestsLiveData = repository.pullRequestsLiveData
+
     val errorMessageLiveData = repository.errorMessageLiveData
 
     fun getRepositories() = repository.getRepositories()
+
+    fun getPullRequests(repoName: String) = repository.getPullRequests(repoName)
 }

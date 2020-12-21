@@ -8,4 +8,6 @@ class RequestManager @Inject constructor(
 ) {
 
     fun getRepositories() = repositoryService.getRepositories()
+
+    fun getPullRequests(repoName: String) = repositoryService.getPullRequests(repoName)
 }
