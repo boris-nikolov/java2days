@@ -26,7 +26,6 @@ class PullRequestsFragment : Fragment() {
 
     private val args: PullRequestsFragmentArgs by navArgs()
 
-    // yet another comment
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
