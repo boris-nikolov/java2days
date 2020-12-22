@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -100,6 +101,10 @@ dependencies {
     // Hilt dependency injection
     implementation "com.google.dagger:hilt-android:$rootProject.hiltVersion"
     kapt "com.google.dagger:hilt-android-compiler:$rootProject.hiltVersion"
+
+    // Fragment navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navVersion"
 
     // Testing
     testImplementation "junit:junit:$rootProject.junitVersion"
