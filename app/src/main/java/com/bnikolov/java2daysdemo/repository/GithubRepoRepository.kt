@@ -5,8 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.bnikolov.java2daysdemo.enum.ErrorCode
 import com.bnikolov.java2daysdemo.network.manager.RequestManager
-import com.bnikolov.java2daysdemo.network.model.Error
-import com.bnikolov.java2daysdemo.network.model.PullRequest
 import com.bnikolov.java2daysdemo.network.model.Repository
 import com.bnikolov.java2daysdemo.util.Event
 import dagger.hilt.android.qualifiers.ActivityContext
@@ -22,18 +20,10 @@ class GithubRepoRepository @Inject constructor(
 
     private val repositoriesMutableLiveData = MutableLiveData<Event<List<Repository?>?>>()
 
-    private val pullRequestsMutableLiveData = MutableLiveData<Event<List<PullRequest?>?>>()
-
-    private val errorMessageMutableLiveData = MutableLiveData<Event<Error?>?>()
-
     val repositoriesLiveData: LiveData<Event<List<Repository?>?>> = repositoriesMutableLiveData
 
-    val pullRequestsLiveData: LiveData<Event<List<PullRequest?>?>> = pullRequestsMutableLiveData
-
-    val errorMessageLiveData: LiveData<Event<Error?>?> = errorMessageMutableLiveData
-
     fun getRepositories() {
-        if (!checkConnected(context, errorMessageMutableLiveData)) return
+        if (!checkConnected(context)) return
 
         try {
             val request = requestManager.getRepositories()
@@ -49,8 +39,7 @@ class GithubRepoRepository @Inject constructor(
                     } else {
                         handleStatusCode(
                             context,
-                            ErrorCode.fromCode(response.code()),
-                            errorMessageMutableLiveData
+                            ErrorCode.fromCode(response.code())
                         )
                     }
                 }
@@ -59,54 +48,14 @@ class GithubRepoRepository @Inject constructor(
                     t.printStackTrace()
                     handleStatusCode(
                         context,
-                        ErrorCode.ERROR_CODE_GENERAL,
-                        errorMessageMutableLiveData
+                        ErrorCode.ERROR_CODE_GENERAL
                     )
                 }
 
             })
         } catch (e: Exception) {
             e.printStackTrace()
-            handleStatusCode(context, ErrorCode.ERROR_CODE_GENERAL, errorMessageMutableLiveData)
-        }
-    }
-
-    fun getPullRequests(repoName: String) {
-        if (!checkConnected(context, errorMessageMutableLiveData)) return
-
-        try {
-            val request = requestManager.getPullRequests(repoName)
-            request.enqueue(object : Callback<Array<PullRequest>> {
-
-                override fun onResponse(
-                    call: Call<Array<PullRequest>>,
-                    response: Response<Array<PullRequest>>
-                ) {
-                    if (response.isSuccessful) {
-                        pullRequestsMutableLiveData.value =
-                            Event(response.body()?.asList())
-                    } else {
-                        handleStatusCode(
-                            context,
-                            ErrorCode.fromCode(response.code()),
-                            errorMessageMutableLiveData
-                        )
-                    }
-                }
-
-                override fun onFailure(call: Call<Array<PullRequest>>, t: Throwable) {
-                    t.printStackTrace()
-                    handleStatusCode(
-                        context,
-                        ErrorCode.ERROR_CODE_GENERAL,
-                        errorMessageMutableLiveData
-                    )
-                }
-
-            })
-        } catch (e: Exception) {
-            e.printStackTrace()
-            handleStatusCode(context, ErrorCode.ERROR_CODE_GENERAL, errorMessageMutableLiveData)
+            handleStatusCode(context, ErrorCode.ERROR_CODE_GENERAL)
         }
     }
 }
