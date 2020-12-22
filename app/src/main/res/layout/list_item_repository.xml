@@ -39,7 +39,7 @@
             android:id="@+id/is_private"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:padding="@dimen/margin_small"
+            android:padding="@dimen/margin_medium"
             android:src="@drawable/ic_lock"
             android:visibility="@{repo.private ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
