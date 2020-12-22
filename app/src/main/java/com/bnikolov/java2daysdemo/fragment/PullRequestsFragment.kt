@@ -52,8 +52,9 @@ class PullRequestsFragment : Fragment() {
     }
 
     private fun observeLiveData() {
-        pullRequestsViewModel.repositoriesLiveData.observe(viewLifecycleOwner) {
-            pullRequestsAdapter.submitList(it.getContentIfNotHandled())
+        pullRequestsViewModel.repositoriesLiveData.observe(viewLifecycleOwner) { it ->
+            pullRequestsAdapter.submitList(
+                it.getContentIfNotHandled()?.sortedByDescending { it?.state })
         }
 
         pullRequestsViewModel.errorMessageLiveData.observe(viewLifecycleOwner) {
