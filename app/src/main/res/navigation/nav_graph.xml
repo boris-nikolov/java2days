@@ -9,5 +9,21 @@
         android:id="@+id/repositories"
         android:name="com.bnikolov.java2daysdemo.fragment.RepositoriesFragment"
         tools:layout="@layout/fragment_repositories">
+        <action
+            android:id="@+id/action_show_pull_requests"
+            app:destination="@id/pull_requests">
+            <argument
+                android:name="repo"
+                app:argType="com.bnikolov.java2daysdemo.network.model.Repository" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/pull_requests"
+        android:name="com.bnikolov.java2daysdemo.fragment.PullRequestsFragment"
+        tools:layout="@layout/fragment_pull_requests">
+        <argument
+            android:name="repo"
+            app:argType="com.bnikolov.java2daysdemo.network.model.Repository" />
     </fragment>
 </navigation>
