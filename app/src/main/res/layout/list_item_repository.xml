@@ -22,20 +22,6 @@
         android:onClick="@{onRepoClickListener}"
         android:padding="@dimen/margin_small">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/repo_id"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:gravity="start|center_vertical"
-            android:padding="@dimen/margin_small"
-            android:text="@{repo.id}"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="123456789" />
-
         <ImageView
             android:id="@+id/is_private"
             android:layout_width="50dp"
@@ -57,7 +43,7 @@
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/is_private"
-            app:layout_constraintStart_toEndOf="@id/repo_id"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Repo 1" />
     </androidx.constraintlayout.widget.ConstraintLayout>
