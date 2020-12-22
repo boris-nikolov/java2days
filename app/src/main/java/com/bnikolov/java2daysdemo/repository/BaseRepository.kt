@@ -32,18 +32,34 @@ abstract class BaseRepository {
         return when (error) {
             ErrorCode.ERROR_CODE_NO_INTERNET_CONNECTION -> {
                 errorMessageMutableLiveData.value =
-                    Event(
-                        Error(
-                            error.code,
-                            context.getString(R.string.error_no_internet_connection)
+                    when (this) {
+                        is GithubRepoRepository -> Event(
+                            Error(
+                                error.code,
+                                context.getString(R.string.error_no_internet_connection_repositories)
+                            )
                         )
-                    )
+                        is PullRequestsRepository -> Event(
+                            Error(
+                                error.code,
+                                context.getString(R.string.error_no_internet_connection_pull_requests)
+                            )
+                        )
+                        else -> Event(
+                            Error(
+                                error.code,
+                                context.getString(R.string.error_no_internet_connection)
+                            )
+                        )
+                    }
             }
             ErrorCode.UNAUTHORIZED -> {
-                errorMessageMutableLiveData.value = getDefaultErrorEvent(context)
-            }
-            ErrorCode.CONFLICT -> {
-                errorMessageMutableLiveData.value = getDefaultErrorEvent(context)
+                errorMessageMutableLiveData.value = Event(
+                    Error(
+                        error.code,
+                        context.getString(R.string.error_unauthorized)
+                    )
+                )
             }
             else -> {
                 errorMessageMutableLiveData.value = getDefaultErrorEvent(context)

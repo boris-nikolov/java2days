@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Java2DaysDemo</string>
     <string name="error_no_internet_connection">Unable to connect to server. Please check your internet connection.</string>
+    <string name="error_no_internet_connection_repositories">Unable to fetch your repositories. Please check your internet connection.</string>
+    <string name="error_no_internet_connection_pull_requests">Unable to fetch your pull requests. Please check your internet connection.</string>
+    <string name="error_unauthorized">You are not allowed to access this resource.</string>
     <string name="general_error_message">Something went wrong. Please try again later</string>
 </resources>
