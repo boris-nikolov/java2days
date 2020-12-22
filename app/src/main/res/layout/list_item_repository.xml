@@ -9,7 +9,7 @@
 
         <variable
             name="repo"
-            type="com.bnikolov.java2daysdemo.network.model.Repository" />
+            type="com.bnikolov.java2daysdemo.db.model.RepositoryRealm" />
 
         <variable
             name="onRepoClickListener"
@@ -42,7 +42,7 @@
             android:layout_height="50dp"
             android:padding="@dimen/margin_medium"
             android:src="@drawable/ic_lock"
-            android:visibility="@{repo.private ? View.VISIBLE : View.GONE}"
+            android:visibility="@{repo.isPrivate ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

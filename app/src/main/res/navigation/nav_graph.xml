@@ -14,7 +14,7 @@
             app:destination="@id/pull_requests">
             <argument
                 android:name="repo"
-                app:argType="com.bnikolov.java2daysdemo.network.model.Repository" />
+                app:argType="com.bnikolov.java2daysdemo.db.model.RepositoryRealm" />
         </action>
     </fragment>
 
@@ -24,6 +24,6 @@
         tools:layout="@layout/fragment_pull_requests">
         <argument
             android:name="repo"
-            app:argType="com.bnikolov.java2daysdemo.network.model.Repository" />
+            app:argType="com.bnikolov.java2daysdemo.db.model.RepositoryRealm" />
     </fragment>
 </navigation>

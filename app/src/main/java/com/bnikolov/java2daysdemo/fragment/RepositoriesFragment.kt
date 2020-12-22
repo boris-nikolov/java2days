@@ -1,6 +1,7 @@
 package com.bnikolov.java2daysdemo.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,7 @@ import androidx.navigation.findNavController
 import com.bnikolov.java2daysdemo.R
 import com.bnikolov.java2daysdemo.adapter.RepositoryAdapter
 import com.bnikolov.java2daysdemo.databinding.FragmentRepositoriesBinding
-import com.bnikolov.java2daysdemo.network.model.Repository
+import com.bnikolov.java2daysdemo.db.model.RepositoryRealm
 import com.bnikolov.java2daysdemo.view.ItemDecorationExcludeLast
 import com.bnikolov.java2daysdemo.viewmodel.RepositoryViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -34,7 +35,7 @@ class RepositoriesFragment : Fragment(),
     ): View {
         binding = FragmentRepositoriesBinding.inflate(inflater)
 
-        repositoryAdapter = RepositoryAdapter(requireContext())
+        repositoryAdapter = RepositoryAdapter()
         repositoryAdapter.setRepoClickListener(this)
 
         setDataBinding()
@@ -45,7 +46,7 @@ class RepositoriesFragment : Fragment(),
         return binding.root
     }
 
-    override fun onRepositoryClicked(view: View, repo: Repository) {
+    override fun onRepositoryClicked(view: View, repo: RepositoryRealm) {
         val pullRequestAction = RepositoriesFragmentDirections.actionShowPullRequests(repo)
         view.findNavController().navigate(pullRequestAction)
     }
@@ -59,7 +60,9 @@ class RepositoriesFragment : Fragment(),
 
     private fun observeLiveData() {
         repositoryViewModel.repositoriesLiveData.observe(viewLifecycleOwner) {
-            repositoryAdapter.submitList(it.getContentIfNotHandled())
+            Log.e("MY_TEST_LOG", "Received ${it.size} repositories from data source")
+            repositoryAdapter.submitList(it)
+            repositoryAdapter.notifyDataSetChanged()
         }
 
         repositoryViewModel.errorMessageLiveData.observe(viewLifecycleOwner) {
