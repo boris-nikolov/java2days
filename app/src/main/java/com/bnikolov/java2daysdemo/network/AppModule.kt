@@ -2,6 +2,7 @@ package com.bnikolov.java2daysdemo.network
 
 import android.content.Context
 import com.bnikolov.java2daysdemo.BuildConfig
+import com.bnikolov.java2daysdemo.network.service.PullRequestService
 import com.bnikolov.java2daysdemo.network.service.RepositoryService
 import com.bnikolov.java2daysdemo.network.util.signWithToken
 import com.bnikolov.java2daysdemo.util.Constants
@@ -32,6 +33,17 @@ class AppModule {
             .client(getClient())
             .build()
             .create(RepositoryService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun providePullRequestService(): PullRequestService {
+        return Retrofit.Builder()
+            .baseUrl(BuildConfig.SERVER_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(getClient())
+            .build()
+            .create(PullRequestService::class.java)
     }
 
     private fun getClient(): OkHttpClient {
