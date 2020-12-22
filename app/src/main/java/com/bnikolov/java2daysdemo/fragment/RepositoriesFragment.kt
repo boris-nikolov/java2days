@@ -10,6 +10,7 @@ import com.bnikolov.java2daysdemo.R
 import com.bnikolov.java2daysdemo.adapter.RepositoryAdapter
 import com.bnikolov.java2daysdemo.databinding.FragmentRepositoriesBinding
 import com.bnikolov.java2daysdemo.network.model.Repository
+import com.bnikolov.java2daysdemo.view.ItemDecorationExcludeLast
 import com.bnikolov.java2daysdemo.viewmodel.RepositoryViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -51,6 +52,7 @@ class RepositoriesFragment : Fragment(),
 
     private fun setDataBinding() {
         binding.apply {
+            repoList.addItemDecoration(ItemDecorationExcludeLast(binding.root.context))
             repoList.adapter = repositoryAdapter
         }
     }

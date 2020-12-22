@@ -19,14 +19,14 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{onRepoClickListener}">
+        android:onClick="@{onRepoClickListener}"
+        android:padding="@dimen/margin_small">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/pr_title"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:gravity="start|center_vertical"
-            android:padding="@dimen/margin_small"
             android:text="@{pullRequest.title}"
             android:textColor="#000000"
             android:textSize="20sp"
@@ -41,7 +41,6 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:gravity="end|center_vertical"
-            android:padding="@dimen/margin_small"
             android:text="@{pullRequest.state}"
             android:textColor="#000000"
             android:textSize="20sp"

@@ -9,6 +9,7 @@ import androidx.navigation.fragment.navArgs
 import com.bnikolov.java2daysdemo.R
 import com.bnikolov.java2daysdemo.adapter.PullRequestsAdapter
 import com.bnikolov.java2daysdemo.databinding.FragmentPullRequestsBinding
+import com.bnikolov.java2daysdemo.view.ItemDecorationExcludeLast
 import com.bnikolov.java2daysdemo.viewmodel.PullRequestsViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,6 +48,7 @@ class PullRequestsFragment : Fragment() {
     private fun setDataBinding() {
         binding.apply {
             repository = args.repo.name
+            pullRequestsList.addItemDecoration(ItemDecorationExcludeLast(binding.root.context))
             pullRequestsList.adapter = pullRequestsAdapter
         }
     }
