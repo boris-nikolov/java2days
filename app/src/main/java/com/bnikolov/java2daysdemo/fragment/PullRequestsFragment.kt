@@ -45,6 +45,7 @@ class PullRequestsFragment : Fragment() {
 
     private fun setDataBinding() {
         binding.apply {
+            repository = args.repo.name
             pullRequestsList.adapter = pullRequestsAdapter
         }
     }
