@@ -27,6 +27,7 @@ class LocalRepositoryDataSource @Inject constructor() {
     fun saveRepositories(repositories: List<Repository>?) {
         Log.e("MY_TEST_LOG", "Saving ${repositories?.size ?: 0} repositories")
         Realm.getDefaultInstance().executeTransactionAsync {
+            it.delete(RepositoryRealm::class.java)
             for (repository in repositories ?: return@executeTransactionAsync) {
                 it.copyToRealmOrUpdate(repository.toLocalModel())
             }
