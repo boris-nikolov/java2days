@@ -10,6 +10,7 @@ import com.bnikolov.java2daysdemo.viewmodel.RepositoryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+// comment
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
